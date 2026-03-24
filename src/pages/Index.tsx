@@ -7,7 +7,7 @@ import { AuthPage } from '@/components/auth/AuthPage';
 import { useTaskStore } from '@/hooks/useTaskStore';
 import { useAuth } from '@/hooks/useAuth';
 import { format, subDays } from 'date-fns';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Target } from 'lucide-react';
 
 type View = 'planner' | 'analytics';
 
@@ -27,8 +27,11 @@ const Index = () => {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 size={24} className="text-primary animate-spin" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-3">
+        <div className="w-12 h-12 rounded-2xl gradient-hero flex items-center justify-center shadow-lg shadow-primary/20 animate-pulse-glow">
+          <Target size={22} className="text-primary-foreground" />
+        </div>
+        <Loader2 size={18} className="text-primary animate-spin" />
       </div>
     );
   }
@@ -48,7 +51,7 @@ const Index = () => {
         onSignOut={signOut}
       />
 
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden pt-[60px] lg:pt-0">
         {currentView === 'planner' ? (
           <>
             <StatsCards tasks={tasks} />

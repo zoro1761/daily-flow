@@ -76,8 +76,8 @@ export function TaskRow({ task, onUpdate, onRemove }: TaskRowProps) {
         {/* Task input */}
         <input
           type="text"
-          value={task.taskText}
-          onChange={(e) => onUpdate(task.id, { taskText: e.target.value })}
+          value={task.task_text}
+          onChange={(e) => onUpdate(task.id, { task_text: e.target.value })}
           placeholder="What needs to be done?"
           disabled={isFullyLocked || isTimeLocked}
           className={cn(

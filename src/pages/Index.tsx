@@ -3,12 +3,16 @@ import { AppSidebar } from '@/components/layout/AppSidebar';
 import { DayPlanner } from '@/components/planner/DayPlanner';
 import { StatsCards } from '@/components/planner/StatsCards';
 import { AnalyticsDashboard } from '@/components/analytics/AnalyticsDashboard';
+import { AuthPage } from '@/components/auth/AuthPage';
 import { useTaskStore } from '@/hooks/useTaskStore';
+import { useAuth } from '@/hooks/useAuth';
 import { format, subDays } from 'date-fns';
+import { Loader2 } from 'lucide-react';
 
 type View = 'planner' | 'analytics';
 
 const Index = () => {
+  const { user, loading: authLoading, signOut } = useAuth();
   const [currentView, setCurrentView] = useState<View>('planner');
   const {
     tasks,
@@ -18,8 +22,20 @@ const Index = () => {
     addTimeSlot,
     removeTask,
     copyFromDate,
-    getAllTasks,
-  } = useTaskStore();
+    loading: tasksLoading,
+  } = useTaskStore(user?.id ?? null);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 size={24} className="text-primary animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthPage />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
@@ -28,6 +44,8 @@ const Index = () => {
         onSelectDate={setSelectedDate}
         currentView={currentView}
         onViewChange={setCurrentView}
+        userEmail={user.email}
+        onSignOut={signOut}
       />
 
       <main className="flex-1 flex flex-col overflow-hidden">
@@ -37,6 +55,7 @@ const Index = () => {
             <DayPlanner
               date={selectedDate}
               tasks={tasks}
+              loading={tasksLoading}
               onUpdateTask={updateTask}
               onRemoveTask={removeTask}
               onAddSlot={addTimeSlot}
@@ -47,7 +66,7 @@ const Index = () => {
             />
           </>
         ) : (
-          <AnalyticsDashboard tasks={getAllTasks()} />
+          <AnalyticsDashboard userId={user.id} />
         )}
       </main>
     </div>

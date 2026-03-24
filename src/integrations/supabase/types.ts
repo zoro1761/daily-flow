@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      tasks: {
+        Row: {
+          category: Database["public"]["Enums"]["task_category"]
+          created_at: string
+          date: string
+          id: string
+          notes: string
+          priority: Database["public"]["Enums"]["task_priority"]
+          status: Database["public"]["Enums"]["task_status"]
+          task_text: string
+          time_slot: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["task_category"]
+          created_at?: string
+          date: string
+          id?: string
+          notes?: string
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          task_text?: string
+          time_slot: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["task_category"]
+          created_at?: string
+          date?: string
+          id?: string
+          notes?: string
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          task_text?: string
+          time_slot?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +64,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      task_category: "Work" | "Fitness" | "Learning" | "Personal"
+      task_priority: "High" | "Medium" | "Low"
+      task_status: "Done" | "Pending" | "Skipped"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +193,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      task_category: ["Work", "Fitness", "Learning", "Personal"],
+      task_priority: ["High", "Medium", "Low"],
+      task_status: ["Done", "Pending", "Skipped"],
+    },
   },
 } as const

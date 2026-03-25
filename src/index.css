@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
+/* ================= BASE ================= */
 @layer base {
   :root {
     --background: 230 25% 95%;
@@ -37,10 +38,9 @@
 
     --radius: 0.875rem;
 
-    /* Vibrant status colors */
+    /* Status */
     --status-done: 155 75% 42%;
     --status-done-bg: 155 60% 92%;
-    --status-done-glow: 155 75% 42%;
     --status-pending: 4 80% 56%;
     --status-pending-bg: 4 60% 94%;
     --status-skipped: 40 95% 52%;
@@ -51,7 +51,7 @@
     --priority-medium: 40 95% 52%;
     --priority-low: 230 15% 55%;
 
-    /* Category colors - vivid */
+    /* Category */
     --cat-work: 250 85% 60%;
     --cat-fitness: 155 75% 42%;
     --cat-learning: 280 70% 58%;
@@ -62,9 +62,11 @@
     --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(250 30% 98%));
     --gradient-sidebar: linear-gradient(180deg, hsl(250 30% 98%), hsl(0 0% 100%));
 
+    /* Fonts */
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
+    /* Sidebar */
     --sidebar-background: 250 30% 98%;
     --sidebar-foreground: 230 25% 15%;
     --sidebar-primary: 250 85% 60%;
@@ -86,7 +88,6 @@
     --popover-foreground: 230 15% 92%;
 
     --primary: 250 85% 65%;
-    --primary-foreground: 0 0% 100%;
     --primary-glow: 270 85% 70%;
 
     --secondary: 230 20% 15%;
@@ -96,10 +97,7 @@
     --muted-foreground: 230 10% 52%;
 
     --accent: 180 60% 48%;
-    --accent-foreground: 0 0% 100%;
-
     --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 100%;
 
     --border: 230 18% 16%;
     --input: 230 18% 16%;
@@ -112,26 +110,11 @@
     --status-skipped: 40 80% 52%;
     --status-skipped-bg: 40 40% 12%;
 
-    --priority-high: 4 70% 55%;
-    --priority-medium: 40 80% 52%;
-    --priority-low: 230 10% 52%;
-
     --gradient-hero: linear-gradient(135deg, hsl(250 85% 65%), hsl(280 70% 60%), hsl(340 75% 55%));
     --gradient-card: linear-gradient(135deg, hsl(230 22% 10%), hsl(250 20% 13%));
     --gradient-sidebar: linear-gradient(180deg, hsl(230 22% 10%), hsl(230 25% 8%));
-
-    --sidebar-background: 230 22% 10%;
-    --sidebar-foreground: 230 15% 85%;
-    --sidebar-primary: 250 85% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 20% 15%;
-    --sidebar-accent-foreground: 230 15% 92%;
-    --sidebar-border: 230 18% 16%;
-    --sidebar-ring: 250 85% 65%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -142,6 +125,7 @@
   }
 }
 
+/* ================= UTILITIES ================= */
 @layer utilities {
   .font-mono {
     font-family: var(--font-mono);
@@ -154,29 +138,23 @@
   .status-done {
     @apply bg-[hsl(var(--status-done-bg))] text-[hsl(var(--status-done))];
   }
+
   .status-pending {
     @apply bg-[hsl(var(--status-pending-bg))] text-[hsl(var(--status-pending))];
   }
+
   .status-skipped {
     @apply bg-[hsl(var(--status-skipped-bg))] text-[hsl(var(--status-skipped))];
-  }
-
-  .status-dot-done {
-    @apply bg-[hsl(var(--status-done))];
-  }
-  .status-dot-pending {
-    @apply bg-[hsl(var(--status-pending))];
-  }
-  .status-dot-skipped {
-    @apply bg-[hsl(var(--status-skipped))];
   }
 
   .priority-high {
     @apply text-[hsl(var(--priority-high))];
   }
+
   .priority-medium {
     @apply text-[hsl(var(--priority-medium))];
   }
+
   .priority-low {
     @apply text-[hsl(var(--priority-low))];
   }
@@ -194,25 +172,18 @@
     box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1);
   }
 
-  .glow-done {
-    box-shadow: 0 0 12px hsl(var(--status-done) / 0.3);
-  }
-  .glow-pending {
-    box-shadow: 0 0 12px hsl(var(--status-pending) / 0.3);
-  }
-  .glow-skipped {
-    box-shadow: 0 0 12px hsl(var(--status-skipped) / 0.3);
-  }
-
   .cat-stripe-work {
     border-left: 3px solid hsl(var(--cat-work));
   }
+
   .cat-stripe-fitness {
     border-left: 3px solid hsl(var(--cat-fitness));
   }
+
   .cat-stripe-learning {
     border-left: 3px solid hsl(var(--cat-learning));
   }
+
   .cat-stripe-personal {
     border-left: 3px solid hsl(var(--cat-personal));
   }
